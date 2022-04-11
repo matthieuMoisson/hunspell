@@ -1,7 +1,7 @@
 package com.matthieu.hunspell
 
 import com.atlascopco.hunspell.Hunspell
-import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
+import org.apache.spark.sql.{DataFrame, Dataset, SaveMode, SparkSession}
 
 import scala.collection.convert.ImplicitConversions.`list asScalaBuffer`
 
@@ -34,6 +34,6 @@ object app {
     })
 
     lemmas.show(false)
-
+    lemmas.write.mode(SaveMode.Overwrite).csv("src/main/ressources/output.csv")
   }
 }
