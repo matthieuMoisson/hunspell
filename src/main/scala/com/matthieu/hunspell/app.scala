@@ -29,8 +29,11 @@ object app {
     words.show()
     val lemmas: Dataset[String] = words.map(word => {
       val speller = new Hunspell(pathDic, pathAff)
-      val lemmas = speller.analyze(word.getString(0)).toList.map(lemma => getWord(lemma)).distinct
-      lemmas.mkString("+")
+      speller.analyze(word.getString(0))
+        .toList
+        .map(lemma => getWord(lemma))
+        .distinct
+        .mkString("+")
     })
 
     lemmas.show(false)
